@@ -57,7 +57,8 @@ export async function generateStaticParams() {
 	}));
 }
 
-export default async function NewsPage({ params }: { params: { slug: string } }) {
+export default async function NewsPage(props: any) {
+  const { params } = props;
 	const post = await sanityClient.fetch(`
 		*[_type == "post" && slug.current == $slug][0]{
 			title, excerpt, coverImage, publishedAt, author, content
