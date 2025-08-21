@@ -1,22 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a Next.js + Sanity project for SAVET Burkina (veterinary products distributor).
 
 ## Getting Started
 
-First, run the development server:
+Setup:
 
 ```bash
+# 1) Install deps
+npm i
+
+# 2) Configure env (create .env.local)
+SANITY_PROJECT_ID=yourProjectId
+SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_PROJECT_ID=yourProjectId
+NEXT_PUBLIC_SANITY_DATASET=production
+
+# 3) Run app and studio
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` for the site and `http://localhost:3000/studio` for the admin.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Content types: `settings`, `product`, `branch`, `post`, `team`.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
