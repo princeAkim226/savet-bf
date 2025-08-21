@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -47,9 +48,9 @@ function Navigation() {
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-  <a href="/">
+  <Link href="/">
   <Image src="/logosavet.png" alt="SAVET Logo" width={80} height={80} className="rounded-lg hover:scale-105 transition-transform duration-200" />
-</a>
+</Link>
 </div>
 
           {/* Navigation Links */}
