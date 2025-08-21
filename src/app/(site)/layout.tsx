@@ -58,17 +58,17 @@ function Navigation() {
             <a href="/" className="nav-link">Accueil</a>
             <a href="/#about" className="nav-link">À propos</a>
             <a href="/products" className="nav-link">Produits</a>
-            <a href="/#branches" className="nav-link">Agences</a>
-            <a href="/#team" className="nav-link">Équipe</a>
-            <a href="/news" className="nav-link">Actualités</a>
-            <a href="/#contact" className="nav-link">Contact</a>
+            <Link href="/#branches" className="nav-link">Agences</Link>
+            <Link href="/#team" className="nav-link">Équipe</Link>
+            <Link href="/news" className="nav-link">Actualités</Link>
+            <Link href="/#contact" className="nav-link">Contact</Link>
           </div>
 
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
-            <a href="/#contact" className="btn-primary">
+            <Link href="/#contact" className="btn-primary">
               Nous contacter
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -116,8 +116,8 @@ function Footer() {
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Navigation</h3>
             <ul className="space-y-3">
-              <li><a href="/#about" className="text-slate-300 hover:text-primary transition-colors">À propos</a></li>
-              <li><a href="/products" className="text-slate-300 hover:text-primary transition-colors">Produits & Services</a></li>
+              <li><Link href="/#about" className="text-slate-300 hover:text-primary transition-colors">À propos</Link></li>
+              <li><Link href="/products" className="text-slate-300 hover:text-primary transition-colors">Produits & Services</Link></li>
               <li><a href="/#branches" className="text-slate-300 hover:text-primary transition-colors">Nos Agences</a></li>
               <li><a href="/#team" className="text-slate-300 hover:text-primary transition-colors">Équipe & Expertise</a></li>
               <li><a href="/news" className="text-slate-300 hover:text-primary transition-colors">Actualités</a></li>
