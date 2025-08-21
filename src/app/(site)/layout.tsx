@@ -118,9 +118,9 @@ function Footer() {
             <ul className="space-y-3">
               <li><Link href="/#about" className="text-slate-300 hover:text-primary transition-colors">À propos</Link></li>
               <li><Link href="/products" className="text-slate-300 hover:text-primary transition-colors">Produits & Services</Link></li>
-              <li><a href="/#branches" className="text-slate-300 hover:text-primary transition-colors">Nos Agences</a></li>
-              <li><a href="/#team" className="text-slate-300 hover:text-primary transition-colors">Équipe & Expertise</a></li>
-              <li><a href="/news" className="text-slate-300 hover:text-primary transition-colors">Actualités</a></li>
+              <li><Link href="/#branches" className="text-slate-300 hover:text-primary transition-colors">Nos Agences</Link></li>
+              <li><Link href="/#team" className="text-slate-300 hover:text-primary transition-colors">Équipe & Expertise</Link></li>
+              <li><Link href="/news" className="text-slate-300 hover:text-primary transition-colors">Actualités</Link></li>
             </ul>
           </div>
 
