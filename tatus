@@ -1,0 +1,5 @@
+[33m13dece7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix: footer internal links use Next.js <Link>
+[33m36921f6[m fix: workaround PageProps type error for Netlify build
+[33m1e869b4[m fix: replace all <a> with <Link> for internal navigation
+[33mb6311fa[m fix: correction typage Next.js dynamic route
+[33m758a3b5[m first commit
