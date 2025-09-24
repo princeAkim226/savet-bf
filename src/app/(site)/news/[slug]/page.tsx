@@ -25,12 +25,13 @@ function cleanSanityData(data: unknown): unknown {
 }
 
 // Générer les métadonnées dynamiques
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
 	const post = await sanityClient.fetch(`
 		*[_type == "post" && slug.current == $slug][0]{
 			title, excerpt
 		}
-	`, { slug: params.slug });
+	`, { slug });
 
 	if (!post) {
 		return {
@@ -57,13 +58,13 @@ export async function generateStaticParams() {
 	}));
 }
 
-export default async function NewsPage(props: { params: { slug: string } }) {
-  const { params } = props;
+export default async function NewsPage(props: { params: Promise<{ slug: string }> }) {
+  const { slug } = await props.params;
 	const post = await sanityClient.fetch(`
 		*[_type == "post" && slug.current == $slug][0]{
 			title, excerpt, coverImage, publishedAt, author, content
 		}
-	`, { slug: params.slug });
+	`, { slug });
 
 	if (!post) {
 		notFound();

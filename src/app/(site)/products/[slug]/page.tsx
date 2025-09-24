@@ -25,12 +25,13 @@ function cleanSanityData(data: unknown): unknown {
 }
 
 // Générer les métadonnées dynamiques
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
 	const product = await sanityClient.fetch(`
 		*[_type == "product" && slug.current == $slug][0]{
 			title, description, category
 		}
-	`, { slug: params.slug });
+	`, { slug });
 
 	if (!product) {
 		return {
@@ -57,12 +58,13 @@ export async function generateStaticParams() {
 	}));
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
 	const product = await sanityClient.fetch(`
 		*[_type == "product" && slug.current == $slug][0]{
 			title, description, category, image, features, isService, content
 		}
-	`, { slug: params.slug });
+	`, { slug });
 
 	if (!product) {
 		notFound();
