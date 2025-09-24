@@ -4,15 +4,15 @@ import { sanityClient } from "@/sanity/client";
 import { urlForImage } from "@/sanity/image";
 
 // Fonction pour nettoyer les données Sanity
-function cleanSanityData(data: any): any {
+function cleanSanityData(data: unknown): unknown {
 	if (Array.isArray(data)) {
 		return data.map(cleanSanityData);
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: any) => child.text || '').join(' ');
+			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
 		}
-		const cleaned: any = {};
+		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
 			if (key !== '_type' && key !== '_key' && key !== 'markDefs' && key !== 'style') {
 				cleaned[key] = cleanSanityData(data[key]);
@@ -106,14 +106,14 @@ export default async function NewsPage() {
 										</div>
 										<div className="p-6 space-y-3 flex-1">
 											<h3 className="text-xl font-semibold text-card-foreground line-clamp-2">{post.title}</h3>
-											<p className="text-muted-foreground line-clamp-3">{post.excerpt || "Extrait de l'article"}</p>
+											<p className="text-muted-foreground line-clamp-3">{post.excerpt || "Extrait de l&apos;article"}</p>
 											{post.author && (
 												<div className="pt-2 text-sm text-muted-foreground">
 													Par <span className="font-medium">{post.author}</span>
 												</div>
 											)}
 											<div className="pt-4">
-												<span className="text-sm text-primary font-medium">Lire l'article complet →</span>
+												<span className="text-sm text-primary font-medium">Lire l&apos;article complet →</span>
 											</div>
 										</div>
 									</article>
@@ -132,7 +132,7 @@ export default async function NewsPage() {
 								Revenez bientôt pour découvrir nos dernières nouvelles et articles.
 							</p>
 							<Link href="/" className="btn-primary">
-								Retour à l'accueil
+								Retour à l&apos;accueil
 							</Link>
 						</div>
 					)}
@@ -157,7 +157,7 @@ export default async function NewsPage() {
 									className="flex-1 px-4 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
 								/>
 								<button className="btn-primary whitespace-nowrap">
-									S'abonner
+									S&apos;abonner
 								</button>
 							</div>
 						</div>
@@ -166,7 +166,7 @@ export default async function NewsPage() {
 								Nous contacter
 							</Link>
 							<Link href="/" className="btn-secondary">
-								Retour à l'accueil
+								Retour à l&apos;accueil
 							</Link>
 						</div>
 					</div>

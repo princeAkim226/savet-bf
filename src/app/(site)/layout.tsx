@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import Link from "next/link";
 import "../globals.css";
 
@@ -55,9 +55,9 @@ function Navigation() {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="nav-link">Accueil</a>
-            <a href="/#about" className="nav-link">À propos</a>
-            <a href="/products" className="nav-link">Produits</a>
+            <Link href="/" className="nav-link">Accueil</Link>
+            <Link href="/#about" className="nav-link">À propos</Link>
+            <Link href="/products" className="nav-link">Produits</Link>
             <Link href="/#branches" className="nav-link">Agences</Link>
             <Link href="/#team" className="nav-link">Équipe</Link>
             <Link href="/news" className="nav-link">Actualités</Link>
@@ -97,7 +97,7 @@ function Footer() {
               <span className="text-2xl font-bold gradient-text">SAVET</span>
             </div>
             <p className="text-slate-300 leading-relaxed">
-              Importateur et distributeur de médicaments vétérinaires, matériel et équipements d'élevage, nutrition animale et solutions de biosécurité.
+              Importateur et distributeur de médicaments vétérinaires, matériel et équipements d&apos;élevage, nutrition animale et solutions de biosécurité.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
@@ -129,7 +129,7 @@ function Footer() {
             <h3 className="text-lg font-semibold">Services</h3>
             <ul className="space-y-3">
               <li className="text-slate-300">Médicaments vétérinaires</li>
-              <li className="text-slate-300">Matériel d'élevage</li>
+              <li className="text-slate-300">Matériel d&apos;élevage</li>
               <li className="text-slate-300">Équipements vétérinaires</li>
               <li className="text-slate-300">Nutrition animale</li>
               <li className="text-slate-300">Solutions de biosécurité</li>
@@ -165,7 +165,7 @@ function Footer() {
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-slate-400 hover:text-primary transition-colors">Mentions légales</a>
               <a href="#" className="text-slate-400 hover:text-primary transition-colors">Politique de confidentialité</a>
-              <a href="#" className="text-slate-400 hover:text-primary transition-colors">Conditions d'utilisation</a>
+              <a href="#" className="text-slate-400 hover:text-primary transition-colors">Conditions d&apos;utilisation</a>
             </div>
           </div>
         </div>

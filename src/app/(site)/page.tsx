@@ -5,17 +5,17 @@ import { settingsQuery, productsQuery, branchesQuery, postsQuery, teamQuery } fr
 import { urlForImage } from "@/sanity/image";
 
 // Fonction pour nettoyer les données Sanity
-function cleanSanityData(data: any): any {
+function cleanSanityData(data: unknown): unknown {
 	if (Array.isArray(data)) {
 		return data.map(cleanSanityData);
 	}
 	if (data && typeof data === 'object') {
 		// Si c'est un objet PortableText, on le convertit en string
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: any) => child.text || '').join(' ');
+			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
 		}
 		// Récursion pour les autres objets
-		const cleaned: any = {};
+		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
 			if (key !== '_type' && key !== '_key' && key !== 'markDefs' && key !== 'style') {
 				cleaned[key] = cleanSanityData(data[key]);
@@ -57,7 +57,7 @@ export default async function LandingPage() {
 									<span className="text-slate-800">Burkina Faso</span>
 								</h1>
 								<p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-									{cleanSettings?.hero?.subtitle || "Importateur et distributeur de médicaments vétérinaires, matériel et équipements d'élevage, nutrition animale et solutions de biosécurité."}
+									{cleanSettings?.hero?.subtitle || "Importateur et distributeur de médicaments vétérinaires, matériel et équipements d&apos;élevage, nutrition animale et solutions de biosécurité."}
 								</p>
 							</div>
 							<div className="flex flex-wrap gap-4">
@@ -121,11 +121,11 @@ export default async function LandingPage() {
 					<div className="section-header">
 						<h2 className="section-title">Produits & Services</h2>
 						<p className="section-subtitle">
-							Découvrez notre gamme complète de solutions vétérinaires et d'équipements
+							Découvrez notre gamme complète de solutions vétérinaires et d&apos;équipements
 						</p>
 					</div>
 					<div className="feature-grid-3">
-						{cleanProducts.map((p: any, index: number) => (
+						{cleanProducts.map((p: unknown, index: number) => (
 							<Link 
 								href={`/products/${p.slug?.current}`} 
 								key={p.slug?.current || index}
@@ -176,14 +176,14 @@ export default async function LandingPage() {
 						</p>
 					</div>
 					<div className="feature-grid-2">
-						{cleanBranches.map((b: any, index: number) => (
+						{cleanBranches.map((b: unknown, index: number) => (
 							<div key={b.slug?.current || index} className={`card card-hover p-8 hover-lift animate-fade-in-up`} style={{ animationDelay: `${index * 0.1}s` }}>
 								<div className="space-y-4">
 									<div className="flex items-center space-x-3">
 										<div className="w-12 h-12 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center">
 											<span className="text-white font-bold text-lg">📍</span>
 										</div>
-										<h3 className="text-2xl font-semibold text-card-foreground">{b.name || "Nom de l'agence"}</h3>
+										<h3 className="text-2xl font-semibold text-card-foreground">{b.name || "Nom de l&apos;agence"}</h3>
 									</div>
 									<div className="space-y-2 text-muted-foreground">
 										<p className="flex items-center space-x-2">
@@ -223,13 +223,13 @@ export default async function LandingPage() {
 						</p>
 					</div>
 					<div className="feature-grid-3">
-						{cleanTeam.map((m: any, index: number) => (
+						{cleanTeam.map((m: unknown, index: number) => (
 							<div key={m.email || m.name || index} className={`card card-hover overflow-hidden hover-lift animate-fade-in-up`} style={{ animationDelay: `${index * 0.1}s` }}>
 								<div className="relative">
 									{m.photo ? (
 										<Image 
 											src={urlForImage(m.photo).width(400).height(400).url()} 
-											alt={m.name || "Membre de l'équipe"} 
+											alt={m.name || "Membre de l&apos;équipe"} 
 											width={400} 
 											height={400} 
 											className="w-full h-64 object-cover" 
@@ -262,7 +262,7 @@ export default async function LandingPage() {
 						</p>
 					</div>
 					<div className="feature-grid-3">
-						{cleanPosts.map((post: any, index: number) => (
+						{cleanPosts.map((post: unknown, index: number) => (
 							<Link 
 								href={`/news/${post.slug?.current}`} 
 								key={post.slug?.current || index}
@@ -285,10 +285,10 @@ export default async function LandingPage() {
 										)}
 									</div>
 									<div className="p-6 space-y-3">
-										<h3 className="text-xl font-semibold text-card-foreground line-clamp-2">{post.title || "Titre de l'article"}</h3>
-										<p className="text-muted-foreground line-clamp-3">{post.excerpt || "Extrait de l'article"}</p>
+										<h3 className="text-xl font-semibold text-card-foreground line-clamp-2">{post.title || "Titre de l&apos;article"}</h3>
+										<p className="text-muted-foreground line-clamp-3">{post.excerpt || "Extrait de l&apos;article"}</p>
 										<div className="pt-2">
-											<span className="text-sm text-primary font-medium">Lire l'article complet →</span>
+											<span className="text-sm text-primary font-medium">Lire l&apos;article complet →</span>
 										</div>
 									</div>
 								</article>

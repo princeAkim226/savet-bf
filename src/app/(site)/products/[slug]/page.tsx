@@ -5,15 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Fonction pour nettoyer les données Sanity
-function cleanSanityData(data: any): any {
+function cleanSanityData(data: unknown): unknown {
 	if (Array.isArray(data)) {
 		return data.map(cleanSanityData);
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: any) => child.text || '').join(' ');
+			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
 		}
-		const cleaned: any = {};
+		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
 			if (key !== '_type' && key !== '_key' && key !== 'markDefs' && key !== 'style') {
 				cleaned[key] = cleanSanityData(data[key]);
@@ -52,7 +52,7 @@ export async function generateStaticParams() {
 		}
 	`);
 
-	return products.map((product: any) => ({
+	return products.map((product: { slug: { current: string } }) => ({
 		slug: product.slug.current,
 	}));
 }
@@ -184,7 +184,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 							<div className="card p-6 text-center">
 								<h3 className="text-lg font-semibold mb-4">Intéressé par ce produit ?</h3>
 								<p className="text-muted-foreground mb-6">
-									Contactez-nous pour plus d'informations ou pour passer une commande.
+									Contactez-nous pour plus d&apos;informations ou pour passer une commande.
 								</p>
 								<Link href="/#contact" className="btn-primary w-full">
 									Nous contacter

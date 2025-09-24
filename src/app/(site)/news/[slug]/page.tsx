@@ -5,15 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Fonction pour nettoyer les données Sanity
-function cleanSanityData(data: any): any {
+function cleanSanityData(data: unknown): unknown {
 	if (Array.isArray(data)) {
 		return data.map(cleanSanityData);
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: any) => child.text || '').join(' ');
+			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
 		}
-		const cleaned: any = {};
+		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
 			if (key !== '_type' && key !== '_key' && key !== 'markDefs' && key !== 'style') {
 				cleaned[key] = cleanSanityData(data[key]);
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 	return {
 		title: `${post.title} - SAVET Burkina Faso`,
-		description: post.excerpt || 'Article d\'actualité SAVET',
+		description: post.excerpt || 'Article d&apos;actualité SAVET',
 	};
 }
 
@@ -52,12 +52,12 @@ export async function generateStaticParams() {
 		}
 	`);
 
-	return posts.map((post: any) => ({
+	return posts.map((post: { slug: { current: string } }) => ({
 		slug: post.slug.current,
 	}));
 }
 
-export default async function NewsPage(props: any) {
+export default async function NewsPage(props: { params: { slug: string } }) {
   const { params } = props;
 	const post = await sanityClient.fetch(`
 		*[_type == "post" && slug.current == $slug][0]{
@@ -207,7 +207,7 @@ export default async function NewsPage(props: any) {
 							{/* Author Info */}
 							{cleanPost.author && (
 								<div className="card p-6">
-									<h3 className="text-lg font-semibold mb-4">À propos de l'auteur</h3>
+									<h3 className="text-lg font-semibold mb-4">À propos de l&apos;auteur</h3>
 									<div className="text-center space-y-3">
 										<div className="w-16 h-16 bg-gradient-to-br from-primary to-emerald-600 rounded-full mx-auto flex items-center justify-center">
 											<span className="text-white text-xl font-bold">
@@ -227,7 +227,7 @@ export default async function NewsPage(props: any) {
 								<h3 className="text-lg font-semibold mb-4">Articles similaires</h3>
 								<div className="space-y-3">
 									<p className="text-sm text-muted-foreground">
-										Découvrez d'autres actualités et articles de SAVET.
+										Découvrez d&apos;autres actualités et articles de SAVET.
 									</p>
 									<Link href="/news" className="btn-secondary w-full text-center">
 										Voir toutes les actualités
@@ -239,7 +239,7 @@ export default async function NewsPage(props: any) {
 							<div className="card p-6 text-center">
 								<h3 className="text-lg font-semibold mb-4">Questions ?</h3>
 								<p className="text-muted-foreground mb-6">
-									Contactez-nous pour plus d'informations sur nos services.
+									Contactez-nous pour plus d&apos;informations sur nos services.
 								</p>
 								<Link href="/#contact" className="btn-primary w-full">
 									Nous contacter

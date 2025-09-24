@@ -4,15 +4,15 @@ import { sanityClient } from "@/sanity/client";
 import { urlForImage } from "@/sanity/image";
 
 // Fonction pour nettoyer les données Sanity
-function cleanSanityData(data: any): any {
+function cleanSanityData(data: unknown): unknown {
 	if (Array.isArray(data)) {
 		return data.map(cleanSanityData);
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: any) => child.text || '').join(' ');
+			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
 		}
-		const cleaned: any = {};
+		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
 			if (key !== '_type' && key !== '_key' && key !== 'markDefs' && key !== 'style') {
 				cleaned[key] = cleanSanityData(data[key]);
@@ -38,7 +38,7 @@ export default async function ProductsPage() {
 	const cleanProducts = cleanSanityData(products) || [];
 
 	// Grouper par catégorie
-	const productsByCategory = cleanProducts.reduce((acc: any, product: any) => {
+	const productsByCategory = cleanProducts.reduce((acc: Record<string, unknown[]>, product: unknown) => {
 		const category = product.category || 'Autres';
 		if (!acc[category]) {
 			acc[category] = [];
@@ -57,7 +57,7 @@ export default async function ProductsPage() {
 							Produits & Services
 						</h1>
 						<p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-							Découvrez notre gamme complète de solutions vétérinaires, équipements d'élevage, 
+							Découvrez notre gamme complète de solutions vétérinaires, équipements d&apos;élevage, 
 							nutrition animale et solutions de biosécurité.
 						</p>
 					</div>
@@ -73,7 +73,7 @@ export default async function ProductsPage() {
 								{category}
 							</h2>
 							<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-								{categoryProducts.map((product: any, index: number) => (
+								{categoryProducts.map((product: unknown, index: number) => (
 									<Link 
 										href={`/products/${product.slug?.current}`} 
 										key={product.slug?.current || index}
@@ -147,7 +147,7 @@ export default async function ProductsPage() {
 								Nous contacter
 							</Link>
 							<Link href="/" className="btn-secondary">
-								Retour à l'accueil
+								Retour à l&apos;accueil
 							</Link>
 						</div>
 					</div>
