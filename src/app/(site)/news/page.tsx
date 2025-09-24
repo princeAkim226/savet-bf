@@ -10,7 +10,7 @@ function cleanSanityData(data: unknown): unknown {
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
+			return data.children.map((child: unknown) => (child as { text?: string }).text || '').join(' ');
 		}
 		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
@@ -70,7 +70,7 @@ export default async function NewsPage() {
 				<div className="container">
 					{cleanPosts.length > 0 ? (
 						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-							{cleanPosts.map((post: any, index: number) => (
+							{cleanPosts.map((post: unknown, index: number) => (
 								<Link 
 									href={`/news/${post.slug?.current}`} 
 									key={post.slug?.current || index}

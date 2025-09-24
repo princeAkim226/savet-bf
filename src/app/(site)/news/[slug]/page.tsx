@@ -11,7 +11,7 @@ function cleanSanityData(data: unknown): unknown {
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
+			return data.children.map((child: unknown) => (child as { text?: string }).text || '').join(' ');
 		}
 		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {

@@ -10,7 +10,7 @@ function cleanSanityData(data: unknown): unknown {
 	}
 	if (data && typeof data === 'object') {
 		if (data._type === 'block' && data.children) {
-			return data.children.map((child: unknown) => (child as any).text || '').join(' ');
+			return data.children.map((child: unknown) => (child as { text?: string }).text || '').join(' ');
 		}
 		const cleaned: Record<string, unknown> = {};
 		for (const key in data) {
@@ -67,7 +67,7 @@ export default async function ProductsPage() {
 			{/* Products List */}
 			<section className="py-20">
 				<div className="container">
-					{Object.entries(productsByCategory).map(([category, categoryProducts]: [string, any]) => (
+					{Object.entries(productsByCategory).map(([category, categoryProducts]: [string, unknown[]]) => (
 						<div key={category} className="mb-20">
 							<h2 className="text-3xl font-bold text-slate-800 mb-8 text-center">
 								{category}
