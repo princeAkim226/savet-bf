@@ -36,7 +36,7 @@ export default async function NewsPage() {
 		}
 	`);
 
-	const cleanPosts = cleanSanityData(posts) || [];
+	const cleanPosts = (cleanSanityData(posts) as unknown[]) || [];
 
 	// Formater la date
 	const formatDate = (dateString: string) => {

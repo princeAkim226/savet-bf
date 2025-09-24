@@ -71,7 +71,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 		notFound();
 	}
 
-	const cleanProduct = cleanSanityData(product);
+	const cleanProduct = cleanSanityData(product) as Record<string, unknown>;
 
 	return (
 		<div className="min-h-screen pt-20">

@@ -36,7 +36,7 @@ export default async function ProductsPage() {
 		}
 	`);
 
-	const cleanProducts = cleanSanityData(products) || [];
+	const cleanProducts = (cleanSanityData(products) as unknown[]) || [];
 
 	// Grouper par catégorie
 	const productsByCategory = cleanProducts.reduce((acc: Record<string, unknown[]>, product: unknown) => {

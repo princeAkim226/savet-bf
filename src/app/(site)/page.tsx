@@ -37,11 +37,11 @@ export default async function LandingPage() {
 	]);
 
 	// Nettoyer toutes les données Sanity
-	const cleanSettings = cleanSanityData(settings);
-	const cleanProducts = cleanSanityData(products) || [];
-	const cleanBranches = cleanSanityData(branches) || [];
-	const cleanPosts = cleanSanityData(posts) || [];
-	const cleanTeam = cleanSanityData(team) || [];
+	const cleanSettings = cleanSanityData(settings) as Record<string, unknown>;
+	const cleanProducts = (cleanSanityData(products) as unknown[]) || [];
+	const cleanBranches = (cleanSanityData(branches) as unknown[]) || [];
+	const cleanPosts = (cleanSanityData(posts) as unknown[]) || [];
+	const cleanTeam = (cleanSanityData(team) as unknown[]) || [];
 
 	return (
 		<div className="min-h-screen">

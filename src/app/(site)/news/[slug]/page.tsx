@@ -71,7 +71,7 @@ export default async function NewsPage(props: { params: Promise<{ slug: string }
 		notFound();
 	}
 
-	const cleanPost = cleanSanityData(post);
+	const cleanPost = cleanSanityData(post) as Record<string, unknown>;
 
 	// Formater la date
 	const formatDate = (dateString: string) => {
