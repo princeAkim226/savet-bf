@@ -11,14 +11,15 @@ function cleanSanityData(data: unknown): unknown {
 	}
 	if (data && typeof data === 'object') {
 		// Si c'est un objet PortableText, on le convertit en string
-		if (data._type === 'block' && data.children) {
-			return data.children.map((child: unknown) => (child as { text?: string }).text || '').join(' ');
+		const dataObj = data as Record<string, unknown>;
+		if (dataObj._type === 'block' && dataObj.children) {
+			return (dataObj.children as unknown[]).map((child: unknown) => (child as { text?: string }).text || '').join(' ');
 		}
 		// Récursion pour les autres objets
 		const cleaned: Record<string, unknown> = {};
-		for (const key in data) {
+		for (const key in dataObj) {
 			if (key !== '_type' && key !== '_key' && key !== 'markDefs' && key !== 'style') {
-				cleaned[key] = cleanSanityData(data[key]);
+				cleaned[key] = cleanSanityData(dataObj[key]);
 			}
 		}
 		return cleaned;
